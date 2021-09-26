@@ -1,0 +1,63 @@
+#NOTE: The Parameters set here were determined emperically, unless in experimentation mode, do not
+# change any of the parameters.
+
+# Select the device to run on
+device: "cpu"
+# Title for the run(OPTIONAL)
+run_title: "DEMO RUN"
+
+# Config related to data
+data:
+  # Dataset name
+  # Ensure the Signal belongs to same dataset
+  name: "SMAP"
+  signal: "E-3"
+  # Sampling Window length
+  window: 100
+  # Anomaly Ratio for experimentation
+  anomaly_ratio: 1.
+  # Test Train Split for training and inference
+  train_test_split: 0.5
+
+siamese:
+  # Train or Eval
+  train: False
+  # if train is set to False then read this model from model folder ./models/stored_model
+  model_name: "siamese_0.01_200_0.0014.pt"
+  # number of iterations
+  steps: 20
+  # learning rate
+  lr: 0.01
+  # Optimizer to be used [sgd, adam, rmsprop]
+  optim: "sgd"
+  # Batch Size
+  batch: 200
+  # Loss function to be used [bcelnr, bcel]
+  loss: "bcelnr"
+  # Feature Vector Size
+  feature_dimensions: 1000
+  # Part of FUTURE Implementation
+  layers: 4
+  # Metric for evaluation [f1]
+  metric: "f1"
+  # Part of FUTURE Implementation
+  activation: "relu"
+  # intervals to run evaluations in
+  eval_interval: 1
+  # Case weights
+  case_weights: 0.
+
+classifier:
+  train: True
+  model_name: "classifier_0.05_200_0.0012.pt"
+  steps: 20
+  optim: "sgd"
+  lr: 0.05
+  batch: 200
+  metric: "f1"
+  loss: "bcelnr"
+  # Hidden Layer size of the Classifier
+  hidden_layer: 32
+  activation: "relu"
+  eval_interval: 1
+  case_weights: 0
